@@ -70,8 +70,61 @@ class CreateUserAddressesTest extends TestCase
         $this->actingAs($user);
         $userAddress = create(UserAddress::class,['user_id' => $user->id]);
         $userAddress->contact_name = '哈哈哈';
-        $this->put('/user_addresses/'.$userAddress->id, $userAddress->toArray())
+        $this->put('/user_addresses/' . $userAddress->id, $userAddress->toArray())
             ->assertRedirect('/user_addresses');
-        $this->get('/user_addresses/'.$userAddress->id)->assertSee($userAddress->contact_name);
+        $this->get('/user_addresses/' . $userAddress->id)->assertSee($userAddress->contact_name);
+    }
+
+    // 用户删除地址
+    /** @test */
+    public function user_can_del_address()
+    {
+        $user = create(User::class);
+        $this->actingAs($user);
+        $userAddress = create(UserAddress::class,['user_id' => $user->id]);
+
+        $this->delete('/user_addresses/' .  $userAddress->id)->assertStatus(204);
+
+
+    }
+    // 用户不能看到修改另一个用户地址的页面
+    /** @test */
+    public function user_can_not_see_edit_anthor_user_address_page()
+    {
+        $user = create(User::class);
+        $this->actingAs($user);
+
+        $anthorUser = create(User::class);
+        $anthorUserAddress = create(UserAddress::class,['user_id' => $anthorUser->id]);
+        $this->get('/user_addresses/' . $anthorUserAddress->id)
+             ->assertStatus(403);
+
+    }
+
+    // 用户不能修改另一个用户地址
+    /** @test */
+    public function user_can_not_update_anthor_user_address()
+    {
+        $user = create(User::class);
+        $this->actingAs($user);
+
+        $anthorUser = create(User::class);
+        $anthorUserAddress = create(UserAddress::class,['user_id' => $anthorUser->id]);
+        $anthorUserAddress->contact_name = "测试";
+        $this->put('/user_addresses/' . $anthorUserAddress->id, $anthorUserAddress->toArray())
+             ->assertStatus(403);
+    }
+
+    // 用户不能删除另一个用户地址
+    /** @test */
+    public function user_can_not_destory_anthor_user_address()
+    {
+        $user = create(User::class);
+        $this->actingAs($user);
+
+        $anthorUser = create(User::class);
+        $anthorUserAddress = create(UserAddress::class,['user_id' => $anthorUser->id]);
+
+        $this->delete('/user_addresses/' .  $anthorUserAddress->id)->assertStatus(403);
     }
 }
