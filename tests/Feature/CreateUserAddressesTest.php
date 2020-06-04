@@ -13,10 +13,10 @@ class CreateUserAddressesTest extends TestCase
     /** @test */
     public function a_user_can_create_new_address()
     {
-        $user = factory(User::class)->create();
+        $user = create(User::class);
         $this->actingAs($user);
 
-        $userAddress = factory(UserAddress::class)->make(['user_id' => $user->id]);
+        $userAddress = make(UserAddress::class,['user_id' => $user->id]);
 
         $this->post('/user_addresses', $userAddress->toArray());
 
@@ -25,5 +25,14 @@ class CreateUserAddressesTest extends TestCase
             ->assertSee($userAddress->full_address)
             ->assertSee($userAddress->zip)
             ->assertSee($userAddress->contact_phone);
+    }
+
+    /** @test */
+    public function guests_may_not_create_address()
+    {
+
+        $userAddress = make(UserAddress::class);
+        $this->post('/user_addresses', $userAddress->toArray())->assertRedirect('/login');
+
     }
 }

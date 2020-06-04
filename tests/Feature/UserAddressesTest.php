@@ -16,15 +16,15 @@ class UserAddressesTest extends TestCase
     public function a_user_can_view_own_addresses()
     {
          // 已登录用户
-        $user = factory(User::class)->create();
+        $user = create(User::class);
         $this->actingAs($user);
 
         // 生成地址
-        $userAddress = factory(UserAddress::class)->create(['user_id' => $user->id]);
+        $userAddress = create(UserAddress::class, ['user_id' => $user->id]);
 
          // 另一个用户
-        $anthorUser = factory(User::class)->create();
-        $anthorUserAddress = factory(UserAddress::class)->create(['user_id' => $anthorUser->id]);
+        $anthorUser = create(User::class);
+        $anthorUserAddress = create(UserAddress::class, ['user_id' => $anthorUser->id]);
 
         $response = $this->get('/user_addresses');
 
@@ -38,4 +38,6 @@ class UserAddressesTest extends TestCase
                  ->assertDontSee($anthorUserAddress->zip)
                  ->assertDontSee($anthorUserAddress->contact_phone);
     }
+
+
 }
