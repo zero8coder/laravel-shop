@@ -20,22 +20,22 @@ class UserAddressesTest extends TestCase
         $this->actingAs($user);
 
         // 生成地址
-        $userAddresses = factory(UserAddress::class)->create(['user_id' => $user->id]);
+        $userAddress = factory(UserAddress::class)->create(['user_id' => $user->id]);
 
          // 另一个用户
         $anthorUser = factory(User::class)->create();
-        $anthorUserAddresses = factory(UserAddress::class)->create(['user_id' => $anthorUser->id]);
+        $anthorUserAddress = factory(UserAddress::class)->create(['user_id' => $anthorUser->id]);
 
         $response = $this->get('/user_addresses');
 
         $response->assertStatus(200)
-                 ->assertSee($userAddresses->contact_name)
-                 ->assertSee($userAddresses->full_address)
-                 ->assertSee($userAddresses->zip)
-                 ->assertSee($userAddresses->contact_phone)
-                 ->assertDontSee($anthorUserAddresses->contact_name)
-                 ->assertDontSee($anthorUserAddresses->full_address)
-                 ->assertDontSee($anthorUserAddresses->zip)
-                 ->assertDontSee($anthorUserAddresses->contact_phone);
+                 ->assertSee($userAddress->contact_name)
+                 ->assertSee($userAddress->full_address)
+                 ->assertSee($userAddress->zip)
+                 ->assertSee($userAddress->contact_phone)
+                 ->assertDontSee($anthorUserAddress->contact_name)
+                 ->assertDontSee($anthorUserAddress->full_address)
+                 ->assertDontSee($anthorUserAddress->zip)
+                 ->assertDontSee($anthorUserAddress->contact_phone);
     }
 }
