@@ -31,11 +31,9 @@ class UserAddressesTest extends TestCase
         $response->assertStatus(200)
                  ->assertSee($userAddress->contact_name)
                  ->assertSee($userAddress->full_address)
-                 ->assertSee($userAddress->zip)
                  ->assertSee($userAddress->contact_phone)
                  ->assertDontSee($anthorUserAddress->contact_name)
                  ->assertDontSee($anthorUserAddress->full_address)
-                 ->assertDontSee($anthorUserAddress->zip)
                  ->assertDontSee($anthorUserAddress->contact_phone);
     }
 
