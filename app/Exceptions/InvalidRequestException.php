@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class InvalidRequestException extends Exception
 {
-    public function __contruct(string $message = "", int $code = 400)
+    public function __construct(string $message = "", int $code = 400)
     {
-        parent::__contruct($message, $code);
+        parent::__construct($message, $code);
     }
 
     public function render(Request $request)
