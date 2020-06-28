@@ -68,6 +68,7 @@ class ProductsController extends Controller
             ],
             // 等价于 isset($category) ? $category : null
             'category' => $category ?? null,
+
         ]);
     }
 
