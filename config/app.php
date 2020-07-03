@@ -230,7 +230,7 @@ return [
     ],
 
     // 订单关闭时间，单位秒
-    'order_ttl' => 30,
+    'order_ttl' => 1800,
 
     'ngrok_url' => env('NGROK_URL'),
 
