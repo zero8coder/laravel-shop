@@ -34,7 +34,7 @@ class UpdateCrowdfundingProductProgress implements ShouldQueue
                 // 并且包含了本商品
                 $query->where('product_id', $crowdfunding->product->id);
             })
-            ->firts([
+            ->first([
                 // 取出订单总额
                 \DB::raw('sum(total_amount) as total_amount'),
                 // 取出去重的支持用户数
