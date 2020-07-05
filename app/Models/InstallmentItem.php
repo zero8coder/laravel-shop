@@ -46,7 +46,7 @@ class InstallmentItem extends Model
             $total->add($this->fine);
         }
 
-        return $total;
+        return (string)$total;
     }
 
     // 创建一个访问器，返回当前还款计划是否已经逾期
