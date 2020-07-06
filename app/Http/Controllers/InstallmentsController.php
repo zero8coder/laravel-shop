@@ -87,7 +87,7 @@ class InstallmentsController extends Controller
             return 'fail';
         }
         // 根据还款计划编号查询对应的还款计划，原则上不会找不到，这里的判断只是增强代码健壮性
-        if (!$item = $installment->items()->where('sequence', $sequence)->firts()) {
+        if (!$item = $installment->items()->where('sequence', $sequence)->first()) {
             return 'fail';
         }
         // 如果这个还款计划的支付状态是已支付，则告知支付宝此订单已完成，并不再执行后续逻辑
