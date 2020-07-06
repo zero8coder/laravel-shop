@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InstallmentItem;
 use Illuminate\Http\Request;
 use App\Models\Installment;
 use App\Exceptions\InvalidRequestException;
