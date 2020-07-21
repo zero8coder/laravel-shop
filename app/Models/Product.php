@@ -10,9 +10,12 @@ class Product extends Model
 {
     const TYPE_NORMAL = 'normal';
     const TYPE_CROWDFUNDING = 'crowdfunding';
+    const TYPE_SECKILL = 'seckill';
+
     public static $typeMap = [
-      self::TYPE_NORMAL => '普通商品',
-      self::TYPE_CROWDFUNDING => '众筹商品',
+        self::TYPE_NORMAL => '普通商品',
+        self::TYPE_CROWDFUNDING => '众筹商品',
+        self::TYPE_SECKILL => '秒杀商品',
     ];
 
     protected $fillable = [
@@ -78,16 +81,16 @@ class Product extends Model
     {
         // 只取出需要的字段
         $arr = Arr::only($this->toArray(), [
-           'id',
-           'type',
-           'title',
-           'category_id',
-           'long_title',
-           'on_sale',
-           'rating',
-           'sold_count',
-           'review_count',
-           'price',
+            'id',
+            'type',
+            'title',
+            'category_id',
+            'long_title',
+            'on_sale',
+            'rating',
+            'sold_count',
+            'review_count',
+            'price',
         ]);
 
         // 如果商品有类目，则 category 字段为类目名数组，否则为空字符串
@@ -105,7 +108,7 @@ class Product extends Model
 
             // 对应地增加一个 search_value 字段，用符号 : 将属性名和属性值拼接起来
             return array_merge(Arr::only($property->toArray(), ['name', 'value']), [
-                'search_value' => $property->name.':'.$property->value,
+                'search_value' => $property->name . ':' . $property->value,
             ]);
         });
 
@@ -115,6 +118,11 @@ class Product extends Model
     public function scopeByIds($query, $ids)
     {
         return $query->whereIn('id', $ids)->orderByRaw(sprintf("FIND_IN_SET(id, '%s')", join(',', $ids)));
+    }
+
+    public function seckill()
+    {
+        return $this->hasOne(SeckillProduct::class);
     }
 
 }
