@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,NULL),(2,0,9,'系统管理','fa-tasks',NULL,NULL,NULL,'2020-06-29 16:01:36'),(3,2,10,'管理员','fa-users','auth/users',NULL,NULL,'2020-06-29 16:01:36'),(4,2,11,'角色管理','fa-user','auth/roles',NULL,NULL,'2020-06-29 16:01:36'),(5,2,12,'权限管理','fa-ban','auth/permissions',NULL,NULL,'2020-06-29 16:01:36'),(6,2,13,'菜单管理','fa-bars','auth/menu',NULL,NULL,'2020-06-29 16:01:36'),(7,2,14,'操作日志','fa-history','auth/logs',NULL,NULL,'2020-06-29 16:01:36'),(8,0,2,'用户管理','fa-user','/users',NULL,NULL,NULL),(9,0,7,'订单管理','fa-money','/orders',NULL,NULL,'2020-06-29 16:01:36'),(10,0,4,'商品管理','fa-apple','/products',NULL,NULL,NULL),(11,0,8,'优惠券管理','fa-ticket','/coupon_codes',NULL,NULL,'2020-06-29 16:01:36'),(12,0,3,'类目','fa-bars','/categories',NULL,NULL,NULL),(13,10,6,'众筹商品','fa-flag-checkered','/crowdfunding_products',NULL,'2020-06-29 15:59:56','2020-06-29 16:01:36'),(14,10,5,'普通商品','fa-cubes','/products',NULL,'2020-06-29 16:01:19','2020-06-29 16:01:36');
+INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,NULL),(2,0,10,'系统管理','fa-tasks',NULL,NULL,NULL,'2020-07-21 17:14:37'),(3,2,11,'管理员','fa-users','auth/users',NULL,NULL,'2020-07-21 17:14:37'),(4,2,12,'角色管理','fa-user','auth/roles',NULL,NULL,'2020-07-21 17:14:37'),(5,2,13,'权限管理','fa-ban','auth/permissions',NULL,NULL,'2020-07-21 17:14:37'),(6,2,14,'菜单管理','fa-bars','auth/menu',NULL,NULL,'2020-07-21 17:14:37'),(7,2,15,'操作日志','fa-history','auth/logs',NULL,NULL,'2020-07-21 17:14:37'),(8,0,2,'用户管理','fa-user','/users',NULL,NULL,NULL),(9,0,8,'订单管理','fa-money','/orders',NULL,NULL,'2020-07-21 17:14:37'),(10,0,4,'商品管理','fa-apple','/products',NULL,NULL,NULL),(11,0,9,'优惠券管理','fa-ticket','/coupon_codes',NULL,NULL,'2020-07-21 17:14:37'),(12,0,3,'类目','fa-bars','/categories',NULL,NULL,NULL),(13,10,6,'众筹商品','fa-flag-checkered','/crowdfunding_products',NULL,'2020-06-29 15:59:56','2020-06-29 16:01:36'),(14,10,5,'普通商品','fa-cubes','/products',NULL,'2020-06-29 16:01:19','2020-06-29 16:01:36'),(15,10,7,'秒杀商品','fa-bolt','/seckill_products',NULL,'2020-07-21 17:14:16','2020-07-21 17:20:06');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-29  8:12:11
+-- Dump completed on 2020-07-21  9:41:12
