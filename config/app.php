@@ -231,6 +231,8 @@ return [
 
     // 订单关闭时间，单位秒
     'order_ttl' => 1800,
+    // 秒杀订单关闭时间
+    'seckill_order_ttl' => 600,
 
     'ngrok_url' => env('NGROK_URL'),
 
