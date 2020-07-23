@@ -5,7 +5,9 @@ namespace App\Http\Requests;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductSku;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Auth\AuthenticationException;
+use App\Exceptions\InvalidRequestException;
 
 class SeckillOrderRequest extends Request
 {
@@ -23,6 +25,18 @@ class SeckillOrderRequest extends Request
             'sku_id'     => [
                 'required',
                 function ($attribute, $value, $fail) {
+                    // 从 Redis 中读取数据
+                    $stock = Redis::get('seckill_sku_'.$value);
+
+                    // 如果是 null 代表这个 SKU 不是秒杀商品
+                    if (is_null($stock)) {
+                        return $fail('该商品不存在');
+                    }
+                    // 判断库存
+                    if ($stock < 1) {
+                        return $fail('该商品已售完');
+                    }
+
                     if (!$sku = ProductSku::find($value)) {
                         return $fail('该商品不存在');
                     }
@@ -40,6 +54,13 @@ class SeckillOrderRequest extends Request
                     }
                     if ($sku->stock < 1) {
                         return $fail('该商品已售完');
+                    }
+
+                    if (!$user = \Auth::user()) {
+                        throw new AuthenticationException('请先登录');
+                    }
+                    if (!$user->email_verified_at) {
+                        throw new InvalidRequestException('请先验证邮箱');
                     }
 
                     if ($order = Order::query()

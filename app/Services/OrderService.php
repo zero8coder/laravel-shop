@@ -13,6 +13,7 @@ use App\Jobs\CloseOrder;
 use Carbon\Carbon;
 use App\Exceptions\InternalException;
 use App\Jobs\RefundInstallmentOrder;
+use Illuminate\Support\Facades\Redis;
 
 
 class OrderService
@@ -219,6 +220,7 @@ class OrderService
             $item->productSku()->associate($sku);
             $item->save();
 
+            Redis::decr('seckill_sku_'.$sku->id);
             return $order;
         });
         // 秒杀订单的自动关闭时间与普通订单不同
